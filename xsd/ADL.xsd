@@ -1,0 +1,1096 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2020 sp1 (http://www.altova.com) by  (Zorginstituut Nederland) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:adl="http://www.ciz.nl/adl/1_0/schema" targetNamespace="http://www.ciz.nl/adl/1_0/schema" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:appinfo>
+			<adl:BerichtXsdVersie>1.0.0</adl:BerichtXsdVersie>
+			<adl:BerichtXsdMinVersie>1.0.0</adl:BerichtXsdMinVersie>
+			<adl:BerichtXsdMaxVersie>1.0.0</adl:BerichtXsdMaxVersie>
+		</xs:appinfo>
+	</xs:annotation>
+	<xs:element name="Bericht" type="adl:Root"/>
+	<xs:complexType name="Root">
+		<xs:annotation>
+			<xs:documentation>Bericht met informatie over de geindiceerde Wlz-zorg (CIZ naar zorgkantoor).</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Header" type="adl:Header"/>
+			<xs:element name="Client" type="adl:Client"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Header">
+		<xs:annotation>
+			<xs:documentation>De header bevat de identificerende gegevens van het bestand.  </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BerichtVersie">
+				<xs:annotation>
+					<xs:documentation>Volgnummer van de formele uitgifte van een major release van een iStandaard.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:pattern value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="BerichtSubversie">
+				<xs:annotation>
+					<xs:documentation>Volgnummer van de formele uitgifte van een minor release van een iStandaard.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:pattern value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Identificatie" type="adl:LDT_IdentificatieBericht">
+				<xs:annotation>
+					<xs:documentation>Naam of nummer, die ter identificatie aan een totale aanlevering kan worden meegegeven.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Dagtekening" type="adl:LDT_Datum">
+				<xs:annotation>
+					<xs:documentation>De datum van verzending van het bericht.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Client">
+		<xs:annotation>
+			<xs:documentation>Persoonsgegevens van de client.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Bsn" type="adl:LDT_BurgerServicenummer">
+				<xs:annotation>
+					<xs:documentation>Een door de overheid toegekend identificerend nummer in het kader van het vereenvoudigen van het contact tussen overheid en burgers en het verminderen van de administratieve lasten.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GeheimeClient" type="adl:LDT_JaNee">
+				<xs:annotation>
+					<xs:documentation>Indicatie of er vanwege veiligheidsoverwegingen extra zorgvuldig omgegaan moet worden met de gegevens van een client.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Geboortedatum" type="adl:CDT_Geboortedatum">
+				<xs:annotation>
+					<xs:documentation>Geboortedatum van de client of relatie.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Geslacht" type="adl:LDT_Geslacht">
+				<xs:annotation>
+					<xs:documentation>De sekse van een persoon, zoals bij geboorte formeel vastgesteld of nadien formeel gewijzigd.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BurgerlijkeStaat" type="adl:LDT_BurgerlijkeStaat" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Unieke aanduiding die de rechtspositie van een client al dan niet in relatie tot een of meer personen beschrijft.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Naam" type="adl:CDT_VolledigeNaam">
+				<xs:annotation>
+					<xs:documentation>Volledige naam van een natuurlijk persoon, aangeduid als Geslachtsnaam, eventueel Partnernaam, Voornamen en/of Voorletters en NaamGebruik.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Contactgegevens" type="adl:Contactgegevens"/>
+			<xs:element name="Indicatie" type="adl:Indicatie"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Contact">
+		<xs:annotation>
+			<xs:documentation>Gegevens voor de aanduiding van het adres van de client of relatie.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Adres" type="adl:CDT_Adres" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Adres van de client of relatie van de client.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Telefoon" type="adl:CDT_Telefoonnummers" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>De telefoonnummers waarop de client of relatie van de client te bereiken is.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Emailadres" type="adl:LDT_Emailadres" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Het e-mailadres van de client of relatie van de client.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Contactgegevens">
+		<xs:sequence>
+			<xs:element name="Contact" type="adl:Contact" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Indicatie">
+		<xs:annotation>
+			<xs:documentation>De indicatie bevat de indicatiebesluitgegevens van de client.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Besluitnummer" type="adl:LDT_Besluitnummer">
+				<xs:annotation>
+					<xs:documentation>Identificerend nummer van een indicatiebesluit.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Grondslagen" type="adl:CDT_Grondslagen" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>De verzameling van gecodeerde aanduidingen die aangeven wat ten grondslag ligt aan het indicatiebesluit.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Afgiftedatum" type="adl:LDT_Datum">
+				<xs:annotation>
+					<xs:documentation>De datum waarop het indicatiebesluit is afgegeven.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Ingangsdatum" type="adl:LDT_Datum">
+				<xs:annotation>
+					<xs:documentation>De datum die aangeeft vanaf welke datum het indicatiebesluit rechtsgeldig is.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Einddatum" type="adl:LDT_Datum" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Datum die aangeeft tot en met welke datum het indicatiebesluit rechtsgeldig is.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Commentaar" type="adl:LDT_Commentaar" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Vrije tekst (bijvoorbeeld toelichting) in een bericht.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GeindiceerdeFuncties" type="adl:GeindiceerdeFuncties" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GeindiceerdeFuncties">
+		<xs:sequence>
+			<xs:element name="GeindiceerdeFunctie" type="adl:GeindiceerdeFunctie" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GeindiceerdeFunctie">
+		<xs:annotation>
+			<xs:documentation>Gegevens over een geindiceerde functie.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="FunctieCode" type="adl:LDT_FunctieCode">
+				<xs:annotation>
+					<xs:documentation>Gecodeerde aanduiding van een zorgfunctie.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Ingangsdatum" type="adl:LDT_Datum">
+				<xs:annotation>
+					<xs:documentation>De datum die aangeeft vanaf welke datum de geindiceerde zorgeenheid rechtsgeldig is.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Einddatum" type="adl:LDT_Datum" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>De datum die aangeeft tot en met welke datum de geindiceerde zorgeenheid rechtsgeldig is.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Klasse" type="adl:LDT_Klasse">
+				<xs:annotation>
+					<xs:documentation>Gecodeerde aanduiding van de mate van zorg betreffende een zorgeenheid, uitgedrukt in een klasse.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Opslag" type="adl:LDT_Opslag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>De omvang van de opslag op de klasse van de functie.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Leveringsvoorwaarde" type="adl:LDT_Leveringsvoorwaarde">
+				<xs:annotation>
+					<xs:documentation>Codering die aangeeft welke leveringsvoorwaarde van toepassing is op de zorg.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Vervoer" type="adl:LDT_Vervoer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Gecodeerde aanduiding die aangeeft of vervoer van toepassing is.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="InstellingVoorkeur" type="adl:LDT_AgbCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Identificerende code van de instelling die de voorkeur heeft van de client.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Commentaar" type="adl:LDT_Commentaar" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Vrije tekst (bijvoorbeeld toelichting) in een bericht.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Complexe datatypen-->
+	<xs:complexType name="CDT_Achternaam">
+		<xs:annotation>
+			<xs:documentation>De achternaam van een natuurlijk persoon, aangeduid als Naam met Voorvoegsel.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Achternaam" type="adl:LDT_Naam">
+				<xs:annotation>
+					<xs:documentation>De achternaam van een persoon, indien nodig verkort weergegeven.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Voorvoegsel" type="adl:LDT_Voorvoegsel" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Verzameling van een of meer voorzetsels/lidwoorden, die aan het significante deel van de achternaam van een persoon vooraf gaat en daar een onderdeel van is.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CDT_Adres">
+		<xs:annotation>
+			<xs:documentation>Gegevens voor de aanduiding van een adres.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Huisnummer" type="adl:LDT_Huisnummer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>De numerieke aanduiding zoals de gemeente die aan het object heeft toegekend.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Huisletter" type="adl:LDT_Huisletter" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Een alfabetisch teken achter het huisnummer zoals dit door het gemeentebestuur is toegekend.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="HuisnummerToevoeging" type="adl:LDT_HuisnummerToevoeging" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Die letters of tekens die noodzakelijk zijn om, naast huisnummer en -letter, de brievenbus te vinden.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AanduidingWoonadres" type="adl:LDT_AanduidingWoonadres" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>De aanduiding die wordt gebruikt voor adressen die niet zijn voorzien van de gebruikelijke straatnaam en huisnummeraanduidingen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Postcode" type="adl:LDT_Postcode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Aanduiding van de (inter)nationale postcode. Dit veld is geschikt voor zowel de Nederlandse als niet-Nederlandse postcodes.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Straatnaam" type="adl:LDT_Straatnaam" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>De officiele door de gemeente vastgestelde naam van een straat.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Plaatsnaam" type="adl:LDT_Plaatsnaam" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>De door de gemeente vastgestelde naam van een woonplaats.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CDT_Geboortedatum">
+		<xs:annotation>
+			<xs:documentation>Datum waarop een natuurlijk persoon geboren is.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Datum" type="adl:LDT_Datum">
+				<xs:annotation>
+					<xs:documentation>Datum waarop een persoon geboren is.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DatumGebruik" type="adl:LDT_DatumGebruik" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicator die aangeeft welk deel van de voorafgaande datum gebruikt mag worden.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CDT_GeslotenPeriode">
+		<xs:annotation>
+			<xs:documentation>Tijdsperiode met zowel begin- als einddatum</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Begindatum" type="adl:LDT_Datum">
+				<xs:annotation>
+					<xs:documentation>De begindatum van de periode.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Einddatum" type="adl:LDT_Datum">
+				<xs:annotation>
+					<xs:documentation>De einddatum van de periode.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CDT_Grondslagen">
+		<xs:annotation>
+			<xs:documentation>De verzameling van gecodeerde aanduidingen die aangeven wat ten grondslag ligt aan het indicatiebesluit.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Grondslag01" type="adl:LDT_Grondslag">
+				<xs:annotation>
+					<xs:documentation>Gecodeerde aanduiding van wat als eerste ten grondslag ligt aan het indicatiebesluit met betrekking tot de zorg voor een client.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Grondslag02" type="adl:LDT_Grondslag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Gecodeerde aanduiding van wat als tweede ten grondslag ligt aan het indicatiebesluit met betrekking tot de zorg voor een client.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CDT_Telefoonnummers">
+		<xs:annotation>
+			<xs:documentation>De telefoonnummers waarop de client of relatie van de client te bereiken is.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Telefoon01" type="adl:CDT_Telefoon">
+				<xs:annotation>
+					<xs:documentation>Het telefoonnummer waarop de client of relatie van de client te bereiken is.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Telefoon02" type="adl:CDT_Telefoon" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Het telefoonnummer waarop de client of relatie van de client te bereiken is.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CDT_Telefoon">
+		<xs:annotation>
+			<xs:documentation>Het telefoonnummer waarop de client of relatie van de client te bereiken is.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Telefoonnummer" type="adl:LDT_Telefoonnummer">
+				<xs:annotation>
+					<xs:documentation>Het telefoonnummer waarop de client of relatie van de client te bereiken is.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Landnummer" type="adl:LDT_Landnummer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Het telefoonnummer van een land, vanuit Nederland benaderd.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CDT_OpenPeriode">
+		<xs:annotation>
+			<xs:documentation>Aanduiding van een tijdsperiode met een Begindatum en/of een Einddatum.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Begindatum" type="adl:LDT_Datum" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>De begindatum van de periode.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Einddatum" type="adl:LDT_Datum" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>De einddatum van de periode.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CDT_VolledigeNaam">
+		<xs:annotation>
+			<xs:documentation>Volledige naam van een natuurlijk persoon, aangeduid als Geslachtsnaam, eventueel Partnernaam, Voornamen en/of Voorletters en NaamGebruik.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Geslachtsnaam" type="adl:CDT_Achternaam">
+				<xs:annotation>
+					<xs:documentation>Wettelijk vastgelegde achternaam die iemand bij de geboorte erft van de vader of moeder.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Partnernaam" type="adl:CDT_Achternaam" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Na het voltrekken van een huwelijk of na een officiele partnerregistratie van de partner aangenomen familienaam.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Voorletters" type="adl:LDT_Voorletters" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>De verzameling van letters die wordt gevormd door de eerste letter van alle in volgorde voorkomende voornamen van een persoon.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- logische datatypen -->
+	<xs:simpleType name="LDT_AanduidingWoonadres">
+		<xs:annotation>
+			<xs:documentation>De aanduiding die wordt gebruikt voor adressen die niet zijn voorzien van de gebruikelijke straatnaam en huisnummeraanduidingen.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+			<xs:enumeration value="AB">
+				<xs:annotation>
+					<xs:documentation>Aan boord</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BY">
+				<xs:annotation>
+					<xs:documentation>Bij</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TO">
+				<xs:annotation>
+					<xs:documentation>Tegenover</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WW">
+				<xs:annotation>
+					<xs:documentation>Woonwagen</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_AdresSoort">
+		<xs:annotation>
+			<xs:documentation>Nadere typering van het adres.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+			<xs:enumeration value="01">
+				<xs:annotation>
+					<xs:documentation>BRP-adres</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="02">
+				<xs:annotation>
+					<xs:documentation>Correspondentie-adres</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="03">
+				<xs:annotation>
+					<xs:documentation>Verblijfadres</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="04">
+				<xs:annotation>
+					<xs:documentation>Tijdelijk verblijfadres</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_AgbCode">
+		<xs:annotation>
+			<xs:documentation>Identificerende code van een instelling of aanbieder van zorg of ondersteuning (zie https://www.agbcode.nl)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="8"/>
+			<xs:pattern value="[0-9]{8}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Besluitnummer">
+		<xs:annotation>
+			<xs:documentation>Besluitnummer Indicatie</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="999999999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_BurgerServicenummer">
+		<xs:annotation>
+			<xs:documentation>Een door de overheid toegekend identificerend nummer in het kader van het vereenvoudigen van het contact tussen overheid en burgers en het verminderen van de administratieve lasten.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="9"/>
+			<xs:pattern value="[0-9]{9}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_BurgerlijkeStaat">
+		<xs:annotation>
+			<xs:documentation>Unieke aanduiding die de rechtspositie van een client al dan niet in relatie tot een of meer personen beschrijft.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>Ongehuwd en geen geregistreerd partner en nooit gehuwd of geregistreerd partner geweest</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:documentation>Gehuwd</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:documentation>Gescheiden</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4">
+				<xs:annotation>
+					<xs:documentation>Weduwe/weduwnaar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="5">
+				<xs:annotation>
+					<xs:documentation>Geregistreerd partner</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="6">
+				<xs:annotation>
+					<xs:documentation>Gescheiden geregistreerd partner</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="7">
+				<xs:annotation>
+					<xs:documentation>Achtergebleven geregistreerd partner</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="9">
+				<xs:annotation>
+					<xs:documentation>Ongehuwd en geen geregistreerd partner, eventueel wel gehuwd of geregistreerd partner geweest</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Commentaar">
+		<xs:annotation>
+			<xs:documentation>Vrije tekst (bijvoorbeeld een toelichting) in een bericht.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:pattern value="([.\s]*\S+[.\s]*)+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Datum">
+		<xs:annotation>
+			<xs:documentation>Datum</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date">
+			<xs:pattern value="[^:Z]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_DatumGebruik">
+		<xs:annotation>
+			<xs:documentation>Indicator die aangeeft welk deel van de voorafgaande datum gebruikt mag worden.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>dag onbekend; alleen maand en jaar gebruiken</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:documentation>dag en maand onbekend; alleen jaar gebruiken</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:documentation>dag, maand en jaar onbekend; onbekende datum</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Emailadres">
+		<xs:annotation>
+			<xs:documentation>Emailadres van een client of relatie.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="80"/>
+			<xs:pattern value=".*[^\s].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_FunctieCode">
+		<xs:annotation>
+			<xs:documentation>Gecodeerde aanduiding van een zorgfunctie.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+			<xs:enumeration value="21">
+				<xs:annotation>
+					<xs:documentation>HV: Huishoudelijke Hulp</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="31">
+				<xs:annotation>
+					<xs:documentation>PV: Persoonlijke verzorging</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="41">
+				<xs:annotation>
+					<xs:documentation>VP: Verpleging</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="61">
+				<xs:annotation>
+					<xs:documentation>BHALG: Behandeling algemeen (buiten verblijf in Wlz-instelling)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="62">
+				<xs:annotation>
+					<xs:documentation>BHVBF: Behandeling met verblijf</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="63">
+				<xs:annotation>
+					<xs:documentation>BH-IND: Behandeling individueel</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="64">
+				<xs:annotation>
+					<xs:documentation>BH-GRP: Behandeling in groepsverband</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="71">
+				<xs:annotation>
+					<xs:documentation>VBTYD: Verblijf tijdelijk</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="81">
+				<xs:annotation>
+					<xs:documentation>BG-IND: Begeleiding individueel</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="82">
+				<xs:annotation>
+					<xs:documentation>BG-GRP: Begeleiding in groepsverband</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="91">
+				<xs:annotation>
+					<xs:documentation>ADL: ADL-assistentie</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Geslacht">
+		<xs:annotation>
+			<xs:documentation>De sekse van een persoon, zoals bij geboorte formeel vastgesteld of nadien formeel gewijzigd.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:documentation>Onbekend</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>Mannelijk</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:documentation>Vrouwelijk</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Grondslag">
+		<xs:annotation>
+			<xs:documentation>Gecodeerde aanduiding die aangeeft wat ten grondslag ligt aan het indicatiebesluit.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+			<xs:enumeration value="01">
+				<xs:annotation>
+					<xs:documentation>SOMATISCHE ZIEKTE/AANDOENING</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="02">
+				<xs:annotation>
+					<xs:documentation>PSYCHOGERIATRISCHE ZIEKTE/AANDOENING</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="03">
+				<xs:annotation>
+					<xs:documentation>PSYCHIATRISCHE AANDOENING, PSYCHISCHE STOORNIS</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="04">
+				<xs:annotation>
+					<xs:documentation>LICHAMELIJKE HANDICAP (FUNCTIESTOORNIS)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="05">
+				<xs:annotation>
+					<xs:documentation>VERSTANDELIJKE HANDICAP (FUNCTIESTOORNIS)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="06">
+				<xs:annotation>
+					<xs:documentation>ZINTUIGLIJKE HANDICAP (FUNCTIESTOORNIS)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="07">
+				<xs:annotation>
+					<xs:documentation>PSYCHOSOCIALE PROBLEMEN</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Huisletter">
+		<xs:annotation>
+			<xs:documentation>Een alfabetisch teken achter het huisnummer zoals dit door het gemeentebestuur is toegekend.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1"/>
+			<xs:pattern value=".*[^\s].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Huisnummer">
+		<xs:annotation>
+			<xs:documentation>De numerieke aanduiding zoals de gemeente die aan het object heeft toegekend.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="99999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_HuisnummerToevoeging">
+		<xs:annotation>
+			<xs:documentation>Die letters of tekens die noodzakelijk zijn om, naast huisnummer en -letter, de brievenbus te vinden.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="4"/>
+			<xs:pattern value=".*[^\s].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_IdentificatieBericht">
+		<xs:annotation>
+			<xs:documentation>Naam of nummer, die ter identificatie aan een totale aanlevering kan worden meegegeven.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="12"/>
+			<xs:pattern value=".*[^\s].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_JaNee">
+		<xs:annotation>
+			<xs:documentation>Codering voor ja of nee.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>Ja</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:documentation>Nee</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Klasse">
+		<xs:annotation>
+			<xs:documentation>Gecodeerde aanduiding van de mate van zorg betreffende een zorgeenheid, uitgedrukt in een klasse.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4"/>
+			<xs:enumeration value="99">
+				<xs:annotation>
+					<xs:documentation>niet van toepassing</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="K0">
+				<xs:annotation>
+					<xs:documentation>0 tot 1 uur per week (intervalbegeleiding)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="K1">
+				<xs:annotation>
+					<xs:documentation>0 tot 2 uur per week (intervalbegeleiding)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="K2">
+				<xs:annotation>
+					<xs:documentation>2 tot 4 uur per week (intervalbegeleiding, doorgaans meerdere keren per week, gemiddeld 3 uur per week)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="K3">
+				<xs:annotation>
+					<xs:documentation>4 tot 7 uur per week (min of meer dagelijkse begeleiding eventueel meerdere keren per dag, gemiddeld 5 uur/w)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="K4">
+				<xs:annotation>
+					<xs:documentation>7 tot 10 uur per week (continue begeleiding, veelal in samenhang met geclusterd wonen, al dan niet verblijf)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="K5">
+				<xs:annotation>
+					<xs:documentation>10 tot 13 uur per week (continue begeleiding plus toezicht, met geclusterd wonen, structuurbiedend klimaat)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="K6">
+				<xs:annotation>
+					<xs:documentation>13 tot 16 uur per week (continue begeleiding plus toezicht, met geclusterd wonen, structuurbiedend klimaat met extra aandacht voor</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="K7">
+				<xs:annotation>
+					<xs:documentation>16 tot 20 uur per week (continue en intensieve begeleiding, individueel en structuurverlenend, permanent toezicht,</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="K8">
+				<xs:annotation>
+					<xs:documentation>20 tot 25 uur per week (continue begeleiding en bescherming, 24 uurs nabij, in therapeutisch leefklimaat,</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KD01">
+				<xs:annotation>
+					<xs:documentation>Een dagdeel per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KD02">
+				<xs:annotation>
+					<xs:documentation>Twee dagdelen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KD03">
+				<xs:annotation>
+					<xs:documentation>Drie dagdelen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KD04">
+				<xs:annotation>
+					<xs:documentation>Vier dagdelen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KD05">
+				<xs:annotation>
+					<xs:documentation>Vijf dagdelen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KD06">
+				<xs:annotation>
+					<xs:documentation>Zes dagdelen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KD07">
+				<xs:annotation>
+					<xs:documentation>Zeven dagdelen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KD08">
+				<xs:annotation>
+					<xs:documentation>Acht dagdelen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KD09">
+				<xs:annotation>
+					<xs:documentation>Negen dagdelen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KD10">
+				<xs:annotation>
+					<xs:documentation>Tien dagdelen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KD11">
+				<xs:annotation>
+					<xs:documentation>Elf dagdelen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KD12">
+				<xs:annotation>
+					<xs:documentation>Twaalf dagdelen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KD13">
+				<xs:annotation>
+					<xs:documentation>Dertien dagdelen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KD14">
+				<xs:annotation>
+					<xs:documentation>Veertien dagdelen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KD15">
+				<xs:annotation>
+					<xs:documentation>Vijftien dagdelen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KE1">
+				<xs:annotation>
+					<xs:documentation>Gemiddeld een etmaal per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KE2">
+				<xs:annotation>
+					<xs:documentation>Gemiddeld twee etmalen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KE3">
+				<xs:annotation>
+					<xs:documentation>Gemiddeld drie etmalen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KE4">
+				<xs:annotation>
+					<xs:documentation>Gemiddeld vier etmalen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KE5">
+				<xs:annotation>
+					<xs:documentation>Gemiddeld vijf etmalen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KE6">
+				<xs:annotation>
+					<xs:documentation>Gemiddeld zes etmalen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KE7">
+				<xs:annotation>
+					<xs:documentation>Zeven etmalen per week</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Landnummer">
+		<xs:annotation>
+			<xs:documentation>Het telefoonnummer van een land, vanuit Nederland benaderd.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="4"/>
+			<xs:pattern value=".*[^\s].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Leveringsvoorwaarde">
+		<xs:annotation>
+			<xs:documentation>Codering die aangeeft welke leveringsvoorwaarde van toepassing is op de zorg.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>Volgens afspraak op geplande tijden</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:documentation>Volgens afspraak + direct oproepbaar (toezicht op afstand)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:documentation>Voortdurend in de nabijheid (toezicht in nabijheid)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4">
+				<xs:annotation>
+					<xs:documentation>24 uur per dag (toezicht steeds actief)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="8">
+				<xs:annotation>
+					<xs:documentation>Onbekend</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Naam">
+		<xs:annotation>
+			<xs:documentation>De naam van een persoon, indien nodig verkort weergegeven.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="200"/>
+			<xs:pattern value=".*[^\s].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Opslag">
+		<xs:annotation>
+			<xs:documentation>De omvang van de opslag op de klasse van de functie.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Persoonsid">
+		<xs:annotation>
+			<xs:documentation>Identificerend nummer van een natuurlijk persoon.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+			<xs:pattern value=".*[^\s].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Plaatsnaam">
+		<xs:annotation>
+			<xs:documentation>De door de gemeente vastgestelde naam van een woonplaats.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="80"/>
+			<xs:pattern value=".*[^\s].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Postcode">
+		<xs:annotation>
+			<xs:documentation>Aanduiding van de (inter)nationale postcode. Dit veld is geschikt voor zowel de Nederlandse als niet-Nederlandse postcodes.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="8"/>
+			<xs:pattern value=".*[^\s].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Straatnaam">
+		<xs:annotation>
+			<xs:documentation>De officiele door de gemeente vastgestelde naam van een straat.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="24"/>
+			<xs:pattern value=".*[^\s].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Telefoonnummer">
+		<xs:annotation>
+			<xs:documentation>Het telefoonnummer waarop de client of relatie van de client te bereiken is.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="15"/>
+			<xs:pattern value="[0-9]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Vervoer">
+		<xs:annotation>
+			<xs:documentation>Gecodeerde aanduiding die aangeeft of vervoer van toepassing is.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>Vervoer nodig</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:documentation>Vervoer niet nodig</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="9">
+				<xs:annotation>
+					<xs:documentation>Onbekend</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Voorletters">
+		<xs:annotation>
+			<xs:documentation>De verzameling van letters die wordt gevormd door de eerste letter van alle in volgorde voorkomende voornamen van een persoon.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="6"/>
+			<xs:pattern value="([a-zA-ZÀ-ỳ])+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_Voorvoegsel">
+		<xs:annotation>
+			<xs:documentation>Verzameling van een of meer voorzetsels/lidwoorden, die aan het significante deel van de achternaam van een persoon vooraf gaat en daar een onderdeel van is.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+			<xs:pattern value=".*[^\s].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
