@@ -3,9 +3,9 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:adl="http://www.ciz.nl/adl/1_0/schema" targetNamespace="http://www.ciz.nl/adl/1_0/schema" elementFormDefault="qualified">
 	<xs:annotation>
 		<xs:appinfo>
-			<adl:BerichtXsdVersie>1.0.0</adl:BerichtXsdVersie>
-			<adl:BerichtXsdMinVersie>1.0.0</adl:BerichtXsdMinVersie>
-			<adl:BerichtXsdMaxVersie>1.0.0</adl:BerichtXsdMaxVersie>
+			<adl:BerichtXsdVersie>1.1.0</adl:BerichtXsdVersie>
+			<adl:BerichtXsdMinVersie>1.1.0</adl:BerichtXsdMinVersie>
+			<adl:BerichtXsdMaxVersie>1.1.0</adl:BerichtXsdMaxVersie>
 		</xs:appinfo>
 	</xs:annotation>
 	<xs:element name="Bericht" type="adl:Root"/>
@@ -51,6 +51,11 @@
 			<xs:element name="Dagtekening" type="adl:LDT_Datum">
 				<xs:annotation>
 					<xs:documentation>De datum van verzending van het bericht.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Ontvanger" type="adl:LDT_AgbCode">
+				<xs:annotation>
+					<xs:documentation>Identificatie van de zorginstelling, verantwoordelijk voor het leveren van ADL</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -99,6 +104,11 @@
 			<xs:documentation>Gegevens voor de aanduiding van het adres van de client of relatie.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="Soort" type="adl:LDT_AdresSoort">
+				<xs:annotation>
+					<xs:documentation>Nadere typering van het adres.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="Adres" type="adl:CDT_Adres" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Adres van de client of relatie van de client.</xs:documentation>
@@ -112,6 +122,11 @@
 			<xs:element name="Emailadres" type="adl:LDT_Emailadres" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Het e-mailadres van de client of relatie van de client.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Periode" type="adl:CDT_OpenPeriode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Begindatum en/of een einddatum van het verblijf van de client of relatie van de client op een tijdelijk adres.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -204,7 +219,7 @@
 					<xs:documentation>Gecodeerde aanduiding die aangeeft of vervoer van toepassing is.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="InstellingVoorkeur" type="adl:LDT_AgbCode" minOccurs="0">
+			<xs:element name="InstellingVoorkeur" type="adl:LDT_AgbCode">
 				<xs:annotation>
 					<xs:documentation>Identificerende code van de instelling die de voorkeur heeft van de client.</xs:documentation>
 				</xs:annotation>
@@ -396,6 +411,11 @@
 			<xs:element name="Voorletters" type="adl:LDT_Voorletters" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>De verzameling van letters die wordt gevormd door de eerste letter van alle in volgorde voorkomende voornamen van een persoon.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Naamgebruik" type="adl:LDT_NaamGebruik">
+				<xs:annotation>
+					<xs:documentation>Aanduiding naamgebruik (gecodeerd).</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -989,6 +1009,44 @@
 			<xs:minLength value="1"/>
 			<xs:maxLength value="200"/>
 			<xs:pattern value=".*[^\s].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LDT_NaamGebruik">
+		<xs:annotation>
+			<xs:documentation>Aanduiding naamgebruik (gecodeerd).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>Eigen naam</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:documentation>Naam echtgenoot of geregistreerd partner of alternatieve naam</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:documentation>Naam echtgenoot of geregistreerd partner gevolgd door eigen naam</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4">
+				<xs:annotation>
+					<xs:documentation>Eigen naam gevolgd door naam echtgenoot of geregistreerd partner</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="5">
+				<xs:annotation>
+					<xs:documentation>Pseudoniem</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="6">
+				<xs:annotation>
+					<xs:documentation>Niet-natuurlijk persoon</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="LDT_Opslag">
