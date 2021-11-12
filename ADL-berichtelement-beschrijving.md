@@ -48,6 +48,7 @@ De beschrijving bevat de volgende onderdelen:
 |8|GeindiceerdeFunctie|Gegevens over een geindiceerde functie.|ja|InstellingVoorkeur|adl:LDT_AgbCode|Identificerende code van de instelling die de voorkeur heeft van de client.|
 |8|GeindiceerdeFunctie|Gegevens over een geindiceerde functie.|nee|Commentaar|adl:LDT_Commentaar|Vrije tekst (bijvoorbeeld toelichting) in een bericht.|
 
+[terug naar TOC](#Beschrijving-gegegevens-ADL-bericht)
 ## Complexe-datatypen 
 |id|Complextype name|Complextype documentation|verplicht|Element name|Element type|Element documentation|
 |:---|:-------|:---|:---|:---|:---|:---|
